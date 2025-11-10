@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     CharacterController cc;
 
     //중력 가속도
-    public float gravity = -2;
+    public float gravity = -9.81f;
     float yVelocity = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,9 +24,13 @@ public class PlayerMove : MonoBehaviour
         float h = ARAVRInput.GetAxis("Horizontal");
         float v = ARAVRInput.GetAxis("Vertical");
         //방향을 설정한다(키 입력에 따라서 방향값이 프레임마다 설정된다)
-        Vector3 dir = new Vector3(h,0,v);
         
-
+        // 기존 dir 방향
+        Vector3 dir = new Vector3(h,0,v);
+        // 방향 설정 시 normalize 필요하다고 판단되면 >> 
+        //Vector3 dir = new Vector3(h,0,v).normalized;
+        
+        dir = Camera.main.transform.TransformDirection(dir);
 
         yVelocity +=gravity * Time.deltaTime;
         //바닥 아래로 떨어지는 경우를 차단
@@ -41,5 +45,9 @@ public class PlayerMove : MonoBehaviour
         dir.y=yVelocity;
         //이동한다
         cc.Move(dir*speed*Time.deltaTime);
+
+
+
+
     }
 }
