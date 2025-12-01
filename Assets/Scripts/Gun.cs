@@ -35,6 +35,15 @@ public class Gun : MonoBehaviour
                 bulletEffect.Play();
                 bulletImpact.position = hitinfo.point;
                 bulletImpact.forward = hitinfo.normal;
+
+                if(hitinfo.transform.name.Contains("Drone"))
+                {
+                    DroneAI drone = hitinfo.transform.GetComponent<DroneAI>();
+                    if(drone)
+                    {
+                        drone.OnDamageProcess();
+                    }
+                }
             }
 
         }

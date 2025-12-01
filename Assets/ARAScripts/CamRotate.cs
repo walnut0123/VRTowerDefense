@@ -12,7 +12,7 @@ public class CamRotate : MonoBehaviour
         // ������ �� ���� ī�޶��� ������ �����Ѵ�.
         angle = Camera.main.transform.eulerAngles;
         angle.x *= -1;
-        Cam.locstate = Cam
+        //Cam.locstate = Cam;
     }
 
     void Update()
